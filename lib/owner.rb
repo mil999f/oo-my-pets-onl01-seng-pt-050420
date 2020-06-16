@@ -5,7 +5,7 @@
 
   @@owners = []
 
-  def initialize(species, pets ={ :dogs => [], :cats => []})
+  def initialize(species, pets ={:dogs => [], :cats => []})
     @species = species
     @pets = pets
     @@owners << self
@@ -13,10 +13,6 @@
 
   def say_species
     "I am a #{@species}."
-  end
-
-  def buy_fish(fish_name)
-    @pets[:fishes] << Fish.new(fish_name)
   end
 
   def buy_cat(cat_name)
@@ -36,12 +32,6 @@
   def play_with_cats
     @pets[:cats].each do |cat|
       cat.mood = "happy"
-    end
-  end
-
-  def feed_fish
-    @pets[:fishes].each do |fish|
-      fish.mood = "happy"
     end
   end
 
