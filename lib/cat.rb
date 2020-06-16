@@ -1,4 +1,3 @@
- # code goes here
 class Cat
   attr_accessor :mood
   attr_reader :name
