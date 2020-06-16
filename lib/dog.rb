@@ -1,10 +1,18 @@
-  # code goes here
 class Dog
-  attr_accessor :mood
-  attr_reader :name
+  attr_accessor :mood, :owner 
+  attr_reader  :name 
+  @@all = []
+  @@instances = []
 
-  def initialize(name)
-    @name = name
+  def initialize(name, owner)
+    @name = name 
+    @owner = owner 
     @mood = "nervous"
-  end
+    @@instances << self 
+  end 
+
+  def self.all
+    @@instances
+  end 
+
 end
