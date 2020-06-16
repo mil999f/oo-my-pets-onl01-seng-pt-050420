@@ -2,7 +2,6 @@ class Owner
   attr_accessor :pets 
   attr_reader :name, :species
   
-  #@@count = 0 
   @@instances =[]
   
 
