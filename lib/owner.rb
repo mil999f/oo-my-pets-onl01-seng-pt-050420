@@ -8,22 +8,20 @@ class Owner
   def initialize(name)
     @name = name 
     @species = "human"
-    #@@count += 1        #what will this mess up later on in the code? 
     @@instances << self
     
   end 
 
-  def cats      # #this is where we need to check to see
-    #if the cats owner is the one who called this method
+  def cats
     Cat.all.select {|x| x.owner == self}
   end 
 
   def dogs 
-    Dog.all.select  {|x| x.owner == self}   #select mean one dog
+    Dog.all.select  {|x| x.owner == self}   
   end  
 
   def buy_cat(x)
-    Cat.new(x, self)    #create a new cat and attach that cat to the owner
+    Cat.new(x, self)  
   end 
 
   def buy_dog(y)
@@ -31,8 +29,7 @@ class Owner
   end 
 
   def walk_dogs
-    Dog.all.each {|x| x.mood = "happy"}    #each means all dogs
-    #dogs.each {|x| x.mood = "happy"}  This would also work 
+    Dog.all.each {|x| x.mood = "happy"} 
   end 
 
   def feed_cats
@@ -61,21 +58,13 @@ class Owner
   def self.all
     @@instances
   end
-  # def self.all      #stackoverflow: can use ObjectSpace.each_object but not recc.why?
-  #   ObjectSpace.each_object(self).to_a
-  # end 
-
-  # def self.count        #this method showed pass but it did not allow the entire Class method to pass b/c @count does not store the instances. 
-  #   @@count 
-  # end
 
   def self.count
     @@instances.length
-    #self.all.length
   end
 
   def self.reset_all
-    @@instances.clear    #@@instances is used here b/c its stores all the instances: @@instances << self 
+    @@instances.clear
   end 
    
   
