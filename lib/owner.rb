@@ -1,73 +1,185 @@
+require 'pry'
+
+
+
 class Owner
-OWNERS = [] 
-attr_accessor :name, :pets 
-attr_reader :species 
 
-def initialize(species)
-  @species = species 
-  OWNERS << self 
-  @pets = {:fishes => [], :dogs => [], :cats => []}
-end 
+  @@all= []
 
-def self.all ##Do we have to use this if we use a class variable? @@all 
-OWNERS 
-end 
+  attr_accessor :name, :pets
 
-def self.reset_all 
-OWNERS.clear 
-end 
+  attr_reader :species
 
-def self.count
-OWNERS.size 
+
+
+  # Instance Methods #
+
+
+
+  def initialize(species)
+
+    @species = species
+
+    @@all << self
+
+    @pets = {:fishes => [], :dogs => [], :cats => []}
+
+  end
+
+
+
+  def say_species
+
+    return "I am a #{@species}."
+
+  end
+
+
+
+  # Pets #
+
+
+
+  def buy_fish(name_of_fish)
+
+    @pets[:fishes] << Fish.new(name_of_fish)
+
+  end
+
+
+
+  def buy_dog(name_of_dog)
+
+    @pets[:dogs] << Dog.new(name_of_dog)
+
+  end
+
+
+
+  def buy_cat(name_of_cat)
+
+    @pets[:cats] << Cat.new(name_of_cat)
+
+  end
+
+
+
+  def walk_dogs
+
+    @pets.collect do |species, instances|
+
+      if species == :dogs
+
+        instances.each do |dog|
+
+          dog.mood = "happy"
+
+        end
+
+      end
+
+    end
+
+  end
+
+
+
+  def play_with_cats
+
+    @pets.collect do |species, instances|
+
+      if species == :cats
+
+        instances.each do |cat|
+
+          cat.mood = "happy"
+
+        end
+
+      end
+
+    end
+
+  end
+
+
+
+  def feed_fish
+
+    @pets.collect do |species, instances|
+
+      if species == :fishes
+
+        instances.each do |fish|
+
+          fish.mood = "happy"
+
+        end
+
+      end
+
+    end
+
+  end
+
+
+
+  def sell_pets
+
+    @pets.collect do |species, instances|
+
+      instances.each do |pet|
+
+        pet.mood = "nervous"
+
+      end
+
+      instances.clear
+
+    end
+
+  end
+
+
+
+  def list_pets
+
+    num_dogs = @pets[:dogs].size
+
+    num_cats = @pets[:cats].size
+
+    num_fish = @pets[:fishes].size
+
+    return "I have #{num_fish} fish, #{num_dogs} dog(s), and #{num_cats} cat(s)."
+
+  end
+
+
+
+  # Class Methods #
+
+
+
+  def self.all
+
+    @@all
+
+  end
+
+
+
+  def self.reset_all
+
+    @@all.clear
+
+  end
+
+
+
+  def self.count
+
+    @@all.size
+
+  end
+
 end
-
-def species 
-  @species 
-end 
-
-def say_species 
-  return "I am a #{species}"
-end 
-  
-def name 
-  @name #where did we set @name = name? 
-end 
-
-def buy_fish(name)
-  pets[:fishes] << Fish.new(name) #how does owner.rb know where fish.rb is? 
-end 
-
-def buy_cat(name)
-  pets[:cats] << Cat.new(name)
-end 
-
-def buy_dog(name)
-  pets[:dogs] << Dog.new(name)
-end 
-
-def walk_dogs
-  pets[:dog].each do |dog|
-    dog.mood = "happy"
-  end 
-end 
-
-def play_with_cats
-  pets[:cats].each do |cat| 
-  cat.mood = "Happy"
-  end 
-end 
-
-def feed_fish
-  pets[:fish].each do |fish|
-  fish.mood = "happy"
-  end 
-end 
-
-def list_pets
-  "I have #{pets[:fishes].count} fish. I have #{pets[:cats].count} cats. I have #{pets[:dogs].count} dogs."
- end 
-
-end #finish Owner 
-
-
-
