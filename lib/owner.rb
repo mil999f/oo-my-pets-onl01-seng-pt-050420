@@ -1,8 +1,6 @@
-
-
 class Owner
 
-  @@all= []
+  OWNERS = []
 
   attr_accessor :name, :pets
 
@@ -10,7 +8,27 @@ class Owner
 
 
 
-  # Instance Methods #
+  def self.reset_all
+
+    OWNERS.clear
+
+  end
+
+
+
+  def self.all
+
+    OWNERS
+
+  end
+
+
+
+  def self.count
+
+    OWNERS.size
+
+  end
 
 
 
@@ -18,7 +36,7 @@ class Owner
 
     @species = species
 
-    @@all << self
+    OWNERS << self
 
     @pets = {:fishes => [], :dogs => [], :cats => []}
 
@@ -26,37 +44,25 @@ class Owner
 
 
 
-  def say_species
+  def buy_fish(name)
 
-    return "I am a #{@species}."
-
-  end
-
-
-
-  # Pets #
-
-
-
-  def buy_fish(name_of_fish)
-
-    @pets[:fishes] << Fish.new(name_of_fish)
+    pets[:fishes] << Fish.new(name)
 
   end
 
 
 
-  def buy_dog(name_of_dog)
+  def buy_dog(name)
 
-    @pets[:dogs] << Dog.new(name_of_dog)
+    pets[:dogs] << Dog.new(name)
 
   end
 
 
 
-  def buy_cat(name_of_cat)
+  def buy_cat(name)
 
-    @pets[:cats] << Cat.new(name_of_cat)
+    pets[:cats] << Cat.new(name)
 
   end
 
@@ -64,17 +70,9 @@ class Owner
 
   def walk_dogs
 
-    @pets.collect do |species, instances|
+    pets[:dogs].each do |dog|
 
-      if species == :dogs
-
-        instances.each do |dog|
-
-          dog.mood = "happy"
-
-        end
-
-      end
+      dog.mood = "happy"
 
     end
 
@@ -84,17 +82,9 @@ class Owner
 
   def play_with_cats
 
-    @pets.collect do |species, instances|
+    pets[:cats].each do |cat|
 
-      if species == :cats
-
-        instances.each do |cat|
-
-          cat.mood = "happy"
-
-        end
-
-      end
+      cat.mood = "happy"
 
     end
 
@@ -104,17 +94,9 @@ class Owner
 
   def feed_fish
 
-    @pets.collect do |species, instances|
+    pets[:fishes].each do |fish|
 
-      if species == :fishes
-
-        instances.each do |fish|
-
-          fish.mood = "happy"
-
-        end
-
-      end
+      fish.mood = "happy"
 
     end
 
@@ -124,15 +106,9 @@ class Owner
 
   def sell_pets
 
-    @pets.collect do |species, instances|
+    pets.each do |type, array|
 
-      instances.each do |pet|
-
-        pet.mood = "nervous"
-
-      end
-
-      instances.clear
+      pets = {:fishes => [], :dogs => [], :cats => []}
 
     end
 
@@ -140,44 +116,12 @@ class Owner
 
 
 
-  def list_pets
+  def say_species
 
-    num_dogs = @pets[:dogs].size
-
-    num_cats = @pets[:cats].size
-
-    num_fish = @pets[:fishes].size
-
-    return "I have #{num_fish} fish, #{num_dogs} dog(s), and #{num_cats} cat(s)."
+    puts "I am a #{species}."
 
   end
 
 
-
-  # Class Methods #
-
-
-
-  def self.all
-
-    @@all
-
-  end
-
-
-
-  def self.reset_all
-
-    @@all.clear
-
-  end
-
-
-
-  def self.count
-
-    @@all.size
-
-  end
 
 end
